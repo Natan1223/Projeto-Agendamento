@@ -1,0 +1,39 @@
+SELECT i.hora, (SELECT la.quantidade_vagas FROM local_agendamento la ) as quantidade_vagas
+FROM intervalo i
+
+
+
+SELECT COUNT(a.codigo) as quantidade_agendado
+FROM intervalo i
+JOIN agendamento a 
+ON i.hora = a.hora
+AND a.data = '2020-04-26'
+
+
+SELECT 
+(SELECT la.quantidade_vagas FROM local_agendamento la) - 
+(SELECT COUNT(a.codigo) as quantidade_agendado
+FROM intervalo i
+JOIN agendamento a 
+ON i.hora = a.hora
+AND a.data = '2020-04-26') as quantidade_livre
+
+
+-- MOSTRA QUANTIDADE DE VAGAS DISPONIVEIS PARA CADA LOCAL
+SELECT 
+lhv.codigo_local_agendamento,
+lhv.descricao,
+lhv.hora,
+(lhv.quantidade_vagas) 
+- 
+(
+	SELECT count(a.codigo) 
+    FROM agendamento a
+    WHERE a.codigo_local_agendamento = lhv.codigo_local_agendamento
+    and a.hora = lhv.hora
+    and a.data = '2020-04-26'
+    
+) as qtd_vaga_disponivel
+
+FROM vw_local_horario_vagas lhv
+WHERE lhv.codigo_local_agendamento = 1

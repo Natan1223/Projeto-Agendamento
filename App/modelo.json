@@ -1,0 +1,24 @@
+// POST de local horario agendamento e quantidade de vagas;
+{
+    "codigoEmpresa": 1,
+    "descricao": "Local 3 Fundação Teste",
+    "quantidadeVagas": 4,
+    "horarios":[
+        {
+            "codigo": 1
+        },
+        {
+            "codigo": 2
+        },
+        {
+            "codigo": 3
+        },
+        {
+            "codigo": 4
+        },
+        {
+            "codigo": 5
+        }
+    ],
+    "ativo": "T"
+}
